@@ -1,5 +1,6 @@
 package services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import domain.Type;
 @Stateless
 public class StationServices implements StationServicesRemote,
 		StationServicesLocal {
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -69,40 +71,60 @@ public class StationServices implements StationServicesRemote,
 		return entityManager.find(Line.class, id);
 	}
 
-	@Override
-	public List<Station> findStationsByLineId(Integer id) {
-		Line line = this.findLineById(id);
-		String jpql = "select s from Station WHERE s.id in select t.idStation from Type WHERE t.idLine= :id";
-
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("id", id);
-		List<Station> stations = query.getResultList();
-		return stations;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Station> findStationsByLineIdBis(Integer id) {
 		Line line = this.findLineById(id);
 		String jpql = "select s from Station s " + "join s.types ts "
 				+ "where ts.line= :param1";
-
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param1", line);
 		List<Station> stations = query.getResultList();
 		return stations;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Line> findLinesByStation(Integer idStation) {
 		Station station = findStationById(idStation);
 		String jpql = "select l from Line l " + "join l.types ls "
 				+ "where ls.station= :param1";
-
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param1", station);
+
 		List<Line> lines = query.getResultList();
 		return lines;
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Bus> findBusesByLineId(Integer idLine) {
+		List<Bus> buses = new ArrayList<>();
+		try {
+			Line line = findLineById(idLine);
+			String jpql = "SELECT b FROM Bus b WHERE b.line = :param1";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("param1", line);
+			buses = query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return buses;
+	}
+
+	@Override
+	public List<Station> findAllPreviousStationsByStationId(Line line,
+			Station station) {
+
+		List<Station> stations = new ArrayList<>();
+		try {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return stations;
+	}
 }

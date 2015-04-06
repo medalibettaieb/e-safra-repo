@@ -19,10 +19,12 @@ public interface StationServicesRemote {
 
 	Line findLineById(Integer id);
 
-	List<Station> findStationsByLineId(Integer id);
-
 	List<Station> findStationsByLineIdBis(Integer id);
 
 	List<Line> findLinesByStation(Integer idStation);
+
+	List<Bus> findBusesByLineId(Integer idLine);
+
+	List<Station> findAllPreviousStationsByStationId(Line line, Station station);
 
 }
