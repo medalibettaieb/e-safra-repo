@@ -8,7 +8,6 @@ import services.interfaces.StationServicesRemote;
 import services.interfaces.TripServicesRemote;
 import domain.Bus;
 import domain.Line;
-import domain.Station;
 
 public class TestReportBusStop {
 
@@ -20,9 +19,8 @@ public class TestReportBusStop {
 				.lookup("/e-safra-HAJ-FREJ/TripServices!services.interfaces.TripServicesRemote");
 
 		Bus bus = stationServicesRemote.findBusById(1);
-		Line line=bus.getLine();
-		System.out.println(stationServicesRemote.findStationsByLineId(1).size());
-		
+		Line line = bus.getLine();
+
 	}
 
 }
