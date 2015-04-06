@@ -14,67 +14,68 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Type implements Serializable {
 
-        private TypeId typeId;
-        private String type;
-        private Integer stationOrder;
-        private static final long serialVersionUID = 1L;
-        private Station station;
-        private Line line;
+	private TypeId typeId;
+	private String type;
+	private Integer stationOrder;
+	private static final long serialVersionUID = 1L;
 
-        public Type() {
-                super();
-        }
+	private Station station;
+	private Line line;
 
-        public Type(String type, Integer stationOrder, Station station, Line line) {
-                super();
-                this.type = type;
-                this.stationOrder = stationOrder;
-                this.typeId = new TypeId(line.getId(), station.getId());
-        }
+	public Type() {
+		super();
+	}
 
-        @EmbeddedId
-        public TypeId getTypeId() {
-                return typeId;
-        }
+	public Type(String type, Integer stationOrder, Station station, Line line) {
+		super();
+		this.type = type;
+		this.stationOrder = stationOrder;
+		this.typeId = new TypeId(line.getId(), station.getId());
+	}
 
-        public void setTypeId(TypeId typeId) {
-                this.typeId = typeId;
-        }
+	@EmbeddedId
+	public TypeId getTypeId() {
+		return typeId;
+	}
 
-        public String getType() {
-                return type;
-        }
+	public void setTypeId(TypeId typeId) {
+		this.typeId = typeId;
+	}
 
-        public void setType(String type) {
-                this.type = type;
-        }
+	public String getType() {
+		return type;
+	}
 
-        public Integer getStationOrder() {
-                return stationOrder;
-        }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-        public void setStationOrder(Integer stationOrder) {
-                this.stationOrder = stationOrder;
-        }
+	public Integer getStationOrder() {
+		return stationOrder;
+	}
 
-        @ManyToOne
-        @JoinColumn(name = "idStation", referencedColumnName = "id", insertable = false, updatable = false)
-        public Station getStation() {
-                return station;
-        }
+	public void setStationOrder(Integer stationOrder) {
+		this.stationOrder = stationOrder;
+	}
 
-        public void setStation(Station station) {
-                this.station = station;
-        }
+	@ManyToOne
+	@JoinColumn(name = "idStation", referencedColumnName = "id", insertable = false, updatable = false)
+	public Station getStation() {
+		return station;
+	}
 
-        @ManyToOne
-        @JoinColumn(name = "idLine", referencedColumnName = "id", insertable = false, updatable = false)
-        public Line getLine() {
-                return line;
-        }
+	public void setStation(Station station) {
+		this.station = station;
+	}
 
-        public void setLine(Line line) {
-                this.line = line;
-        }
+	@ManyToOne
+	@JoinColumn(name = "idLine", referencedColumnName = "id", insertable = false, updatable = false)
+	public Line getLine() {
+		return line;
+	}
+
+	public void setLine(Line line) {
+		this.line = line;
+	}
 
 }

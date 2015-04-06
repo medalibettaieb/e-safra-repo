@@ -21,6 +21,7 @@ public class Station implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Stop> stops;
+	private List<Type> types;
 
 	public Station() {
 		super();
@@ -56,6 +57,15 @@ public class Station implements Serializable {
 
 	public void setStops(List<Stop> stops) {
 		this.stops = stops;
+	}
+
+	@OneToMany(mappedBy = "station")
+	public List<Type> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<Type> types) {
+		this.types = types;
 	}
 
 }

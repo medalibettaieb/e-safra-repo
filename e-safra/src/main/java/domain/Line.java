@@ -22,6 +22,7 @@ public class Line implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Bus> buses;
+	private List<Type> types;
 
 	public Line() {
 		super();
@@ -64,6 +65,20 @@ public class Line implements Serializable {
 			b.setLine(this);
 		}
 		this.buses = buses;
+	}
+
+	@OneToMany(mappedBy = "line")
+	public List<Type> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<Type> types) {
+		this.types = types;
+	}
+
+	@Override
+	public String toString() {
+		return "Line [name=" + name + "]";
 	}
 
 }

@@ -71,13 +71,38 @@ public class StationServices implements StationServicesRemote,
 
 	@Override
 	public List<Station> findStationsByLineId(Integer id) {
-		Line line=this.findLineById(id);
-		String jpql="select s from Station WHERE s.id in select t.idStation from Type WHERE t.idLine= :id";
-	
-		Query query=entityManager.createQuery(jpql);
+		Line line = this.findLineById(id);
+		String jpql = "select s from Station WHERE s.id in select t.idStation from Type WHERE t.idLine= :id";
+
+		Query query = entityManager.createQuery(jpql);
 		query.setParameter("id", id);
-		List<Station>stations=query.getResultList();
+		List<Station> stations = query.getResultList();
 		return stations;
+	}
+
+	@Override
+	public List<Station> findStationsByLineIdBis(Integer id) {
+		Line line = this.findLineById(id);
+		String jpql = "select s from Station s " + "join s.types ts "
+				+ "where ts.line= :param1";
+
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", line);
+		List<Station> stations = query.getResultList();
+		return stations;
+	}
+
+	@Override
+	public List<Line> findLinesByStation(Integer idStation) {
+		Station station = findStationById(idStation);
+		String jpql = "select l from Line l " + "join l.types ls "
+				+ "where ls.station= :param1";
+
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", station);
+		List<Line> lines = query.getResultList();
+		return lines;
+
 	}
 
 }

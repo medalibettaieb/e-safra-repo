@@ -86,10 +86,15 @@ public class PopulateDataBase {
 		// Creation of a line
 
 		Map<Integer, Station> stations = new HashMap();
+		Map<Integer, Station> stations2 = new HashMap();
 
 		stations.put(0, station);
 		stations.put(1, station2);
 		stations.put(2, station3);
+
+		stations2.put(0, station4);
+		stations2.put(1, station2);
+		stations2.put(2, station);
 
 		entityManager.persist(line);
 		entityManager.persist(line2);
@@ -98,7 +103,9 @@ public class PopulateDataBase {
 		entityManager.persist(station2);
 		entityManager.persist(station3);
 		entityManager.persist(station4);
+
 		stationServicesLocal.createLine(line, stations);
+		stationServicesLocal.createLine(line2, stations2);
 	}
 
 }
