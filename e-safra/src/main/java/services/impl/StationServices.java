@@ -47,6 +47,8 @@ public class StationServices implements StationServicesRemote,
 	public Boolean createLine(Line line, Map<Integer, Station> stations) {
 		Boolean b = false;
 		try {
+			entityManager.persist(line);
+
 			for (int i = 0; i < stations.size(); i++) {
 				String typeName = "";
 				if (i == 0)
@@ -135,7 +137,6 @@ public class StationServices implements StationServicesRemote,
 			entityManager.persist(line);
 			b = true;
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		return b;
 	}
@@ -143,6 +144,21 @@ public class StationServices implements StationServicesRemote,
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Station> findAllStations() {
-		return entityManager.createQuery("Select s from Station s").getResultList();
+		return entityManager.createQuery("Select s from Station s")
+				.getResultList();
+	}
+
+	@Override
+	public Boolean assignBusesToLine(List<Bus> bus, Line line) {
+		Boolean b = false;
+		try {
+			entityManager.merge(line);
+			line.linkBusesToThisLine(bus);
+			entityManager.merge(line);
+			b = true;
+		} catch (Exception e) {
+
+		}
+		return b;
 	}
 }

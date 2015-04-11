@@ -28,17 +28,15 @@ public class LineBean {
 	private StationServicesLocal stationServicesLocal;
 
 	public String doCreateLine() {
-
-		stationServicesLocal.addLine(line);
-
+		stationServicesLocal.createLine(line, stationMap);
 		return "";
 	}
 
 	public String doSelectStationForCurrentLine() {
 		Integer i = stationMap.size();
 		stationMap.put(i, dataModel.getRowData());
-		System.out.println(stationMap.get(i).getName()+" size "+stationMap.size());
-		
+		System.out.println(stationMap.get(i).getName() + " size "
+				+ stationMap.size());
 		return "";
 	}
 

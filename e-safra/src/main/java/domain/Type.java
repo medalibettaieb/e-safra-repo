@@ -2,6 +2,7 @@ package domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -58,7 +59,7 @@ public class Type implements Serializable {
 		this.stationOrder = stationOrder;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "idStation", referencedColumnName = "id", insertable = false, updatable = false)
 	public Station getStation() {
 		return station;
@@ -68,7 +69,7 @@ public class Type implements Serializable {
 		this.station = station;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "idLine", referencedColumnName = "id", insertable = false, updatable = false)
 	public Line getLine() {
 		return line;

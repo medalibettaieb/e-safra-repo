@@ -30,5 +30,7 @@ public interface StationServicesLocal {
 	Boolean addLine(Line line);
 
 	List<Station> findAllStations();
+	
+	Boolean assignBusesToLine(List<Bus> bus, Line line);
 
 }

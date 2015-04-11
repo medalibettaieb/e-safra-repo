@@ -30,5 +30,8 @@ public interface StationServicesRemote {
 	Boolean addLine(Line line);
 	
 	List<Station> findAllStations();
+	
+	Boolean assignBusesToLine(List<Bus> bus, Line line);
+
 
 }
