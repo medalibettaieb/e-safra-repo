@@ -127,4 +127,22 @@ public class StationServices implements StationServicesRemote,
 		}
 		return stations;
 	}
+
+	@Override
+	public Boolean addLine(Line line) {
+		Boolean b = false;
+		try {
+			entityManager.persist(line);
+			b = true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return b;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Station> findAllStations() {
+		return entityManager.createQuery("Select s from Station s").getResultList();
+	}
 }

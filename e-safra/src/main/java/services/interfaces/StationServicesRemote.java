@@ -27,4 +27,8 @@ public interface StationServicesRemote {
 
 	List<Station> findAllPreviousStationsByStationId(Line line, Station station);
 
+	Boolean addLine(Line line);
+	
+	List<Station> findAllStations();
+
 }

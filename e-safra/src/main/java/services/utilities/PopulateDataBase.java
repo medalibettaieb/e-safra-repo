@@ -51,7 +51,7 @@ public class PopulateDataBase {
 
 		Station station = new Station("Tun");
 		Station station2 = new Station("Safax");
-		Station station3 = new Station("lambadouza");
+		Station station3 = new Station("Lambadouza");
 		Station station4 = new Station("Rouad");
 
 		List<Bus> listBuses1 = new ArrayList<>();
@@ -66,18 +66,18 @@ public class PopulateDataBase {
 		line.linkBusesToThisLine(listBuses1);
 		line2.linkBusesToThisLine(listBuses2);
 
-		Driver driver = new Driver(1, "matin", "a", "a", "b");
+		Driver driver = new Driver(1, "matin", "Mohamed", "med@driver.tn", "0000");
 		entityManager.persist(driver);
-		Driver driver2 = new Driver(1, "matin", "b", "b", "c");
+		Driver driver2 = new Driver(1, "midi", "Nizar", "nizar@driver.tn", "0000");
 		entityManager.persist(driver2);
-		BusMan busMan = new BusMan(5, "a", "c", "d");
+		BusMan busMan = new BusMan(5, "Seif", "seif@man.tn", "0000");
 		entityManager.persist(busMan);
-		BusMan busMan2 = new BusMan(5, "a", "c", "d");
+		BusMan busMan2 = new BusMan(5, "Amine", "amine@man.tn", "0000");
 		entityManager.persist(busMan2);
 		try {
 			Passenger passenger = new Passenger((Double) 120.0,
 					new SimpleDateFormat("MM/dd/yyyy").parse("11/25/1991"),
-					true, "a", "d", "d");
+					true, "Patricia", "patricia@passenger.tn", "0000");
 			entityManager.persist(passenger);
 		} catch (Exception e) {
 			// TODO: handle exception
