@@ -1,21 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/template.xhtml">
+	<ui:define name="pageTitle">un</ui:define>
+	<ui:define name="pageContent">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="login" />
+				<h:inputText value="#{loginBean.user.login}" />
+				<h:outputText value="password" />
+				<h:inputSecret value="#{loginBean.user.password}" />
+			</h:panelGrid>
+			<h:commandButton action="#{loginBean.doLogin}" value="login" />
 
-<h:head></h:head>
-<body>
-	<h1>welcome to login page</h1>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputText value="login" />
-			<h:inputText value="#{loginBean.user.login}" />
-			<h:outputText value="password" />
-			<h:inputSecret value="#{loginBean.user.password}" />
-		</h:panelGrid>
-		<h:commandButton action="#{loginBean.doLogin}" value="login" />
+		</h:form>
 
-	</h:form>
-</body>
-</html>
+	</ui:define>
+
+
+</ui:composition>
