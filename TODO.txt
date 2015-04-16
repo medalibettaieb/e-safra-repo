@@ -1,0 +1,13 @@
+- assign busesToLine
+- signal buses stops 
+- templates (bootstrap)
+- arrivalTimeEstimation
+- busesCommingSoon
+- reporting
+- real map
+- google apps (drive , calander maps...),facebook ,twitter...
+- cloud ... (google engine,openshift azure ...)
+- your speciality is welcome ...
+
+
+to be continued ... ;)
