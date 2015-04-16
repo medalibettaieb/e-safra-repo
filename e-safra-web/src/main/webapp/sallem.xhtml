@@ -8,10 +8,11 @@
 <body>
 	welcome
 	<h:form>
-		<h:inputText value="#{mrBean.name}" />
-		<h:outputText value="#{mrBean.name}" />
-		<h:commandButton action="#{mrBean.doSallem}" value="say ahla" />
-
+		<h:selectOneMenu value="#{lineBean.line}" converter="#{lineConverter}">
+			<f:selectItems value="#{lineBean.lines}" var="l"
+				itemLabel="#{l.id}" itemValue="#{l}"></f:selectItems>
+		</h:selectOneMenu>
+		<h:commandButton action="#{lineBean.doDo}" value="ff" />
 	</h:form>
 </body>
 </html>

@@ -23,6 +23,7 @@ public class LineBean {
 	private List<Station> stations = new ArrayList<Station>();
 	private DataModel<Station> dataModel = new ListDataModel<>();
 	private Map<Integer, Station> stationMap = new HashMap<Integer, Station>();
+	private List<Line> lines = new ArrayList<>();
 
 	@EJB
 	private StationServicesLocal stationServicesLocal;
@@ -31,7 +32,11 @@ public class LineBean {
 		stationServicesLocal.createLine(line, stationMap);
 		return "";
 	}
-
+	public String doDo() {
+		System.out.println(line.getName());
+		return "";
+	}
+	
 	public String doSelectStationForCurrentLine() {
 		Integer i = stationMap.size();
 		stationMap.put(i, dataModel.getRowData());
@@ -71,6 +76,15 @@ public class LineBean {
 
 	public void setStationMap(Map<Integer, Station> stationMap) {
 		this.stationMap = stationMap;
+	}
+
+	public List<Line> getLines() {
+		lines = stationServicesLocal.findLinesByStation(1);
+		return lines;
+	}
+
+	public void setLines(List<Line> lines) {
+		this.lines = lines;
 	}
 
 }
