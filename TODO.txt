@@ -2,7 +2,7 @@
 - signal buses stops 
 - templates (bootstrap)
 - arrivalTimeEstimation
-- busesCommingSoon
+- busesComingSoon
 - reporting
 - real map
 - google apps (drive , calander maps...),facebook ,twitter...

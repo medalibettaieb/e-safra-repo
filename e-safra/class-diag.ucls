@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="domain.Bus" project="e-safra" file="/e-safra/src/main/java/domain/Bus.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="297" width="151" x="670" y="1075"/>    
+    <position height="-1" width="-1" x="639" y="1263"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,6 +43,7 @@ public class Station implements Serializable {
 		this.id = id;
 	}
 
+	@Column(unique = true)
 	public String getName() {
 		return name;
 	}

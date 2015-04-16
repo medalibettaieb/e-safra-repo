@@ -8,12 +8,14 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import services.interfaces.StationServicesLocal;
 import services.interfaces.StationServicesRemote;
 import domain.Bus;
 import domain.Line;
 import domain.Station;
+import domain.Stop;
 import domain.Type;
 
 /**
@@ -160,5 +162,77 @@ public class StationServices implements StationServicesRemote,
 
 		}
 		return b;
+	}
+
+	@Override
+	public Line findLineByName(String name) {
+		return (Line) entityManager
+				.createQuery("select l from Line l where l.name = :param1")
+				.setParameter("param1", name).getSingleResult();
+	}
+
+	@Override
+	public List<Bus> findComingSoonBuses(Station station) {
+		List<Bus> buses = new ArrayList<>();
+		List<Line> lines = findLinesByStation(station.getId());
+		for (Line l : lines) {
+			List<Bus> buses2 = findBusesByLineId(l.getId());
+			for (Bus b : buses2) {
+				Stop lastOne = findLastStopByBusId(b.getId());
+				Station lastStation = lastOne.getStation();
+				Integer lastStationOrder = findStationOrderByLineId(
+						lastStation.getId(), l.getId());
+				Integer thisStationOrder = findStationOrderByLineId(
+						station.getId(), l.getId());
+				System.out.println(thisStationOrder);
+				System.out.println(lastStationOrder);
+
+				if (lastStationOrder < thisStationOrder) {
+					buses.add(b);
+				}
+			}
+		}
+
+		return buses;
+	}
+
+	@Override
+	public Stop findLastStopByBusId(Integer idBus) {
+		Stop stop = null;
+		String jpql = "select s from Stop s order by  s.stopId.date desc";
+		TypedQuery<Stop> query = entityManager.createQuery(jpql, Stop.class);
+		stop = query.getResultList().get(0);
+		return stop;
+	}
+
+	@Override
+	public Integer findStationOrderByLineId(Integer idStation, Integer idLine) {
+		Integer order = null;
+		String jpql = "select t.stationOrder from Type t where t.station.id = :param1 and t.line.id =:param2";
+		TypedQuery<Integer> query = entityManager.createQuery(jpql,
+				Integer.class);
+		query.setParameter("param1", idStation);
+		query.setParameter("param2", idLine);
+		try {
+			order = query.getSingleResult();
+		} catch (Exception e) {
+			System.err.println("not found");
+		}
+
+		return order;
+	}
+
+	@Override
+	public Bus findBusByName(String name) {
+		return (Bus) entityManager
+				.createQuery("select b from Bus  b where b.num=:param1")
+				.setParameter("param1", name).getSingleResult();
+	}
+
+	@Override
+	public Station findStationByName(String name) {
+		return (Station) entityManager
+				.createQuery("select s from Station  s where s.name=:param1")
+				.setParameter("param1", name).getSingleResult();
 	}
 }

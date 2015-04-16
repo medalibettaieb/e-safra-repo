@@ -20,6 +20,7 @@ import domain.Driver;
 import domain.Line;
 import domain.Passenger;
 import domain.Station;
+import domain.Stop;
 
 /**
  * Session Bean implementation class PopulateDataBase
@@ -66,9 +67,11 @@ public class PopulateDataBase {
 		line.linkBusesToThisLine(listBuses1);
 		line2.linkBusesToThisLine(listBuses2);
 
-		Driver driver = new Driver(1, "matin", "Mohamed", "med@driver.tn", "0000");
+		Driver driver = new Driver(1, "matin", "Mohamed", "med@driver.tn",
+				"0000");
 		entityManager.persist(driver);
-		Driver driver2 = new Driver(1, "midi", "Nizar", "nizar@driver.tn", "0000");
+		Driver driver2 = new Driver(1, "midi", "Nizar", "nizar@driver.tn",
+				"0000");
 		entityManager.persist(driver2);
 		BusMan busMan = new BusMan(5, "Seif", "seif@man.tn", "0000");
 		entityManager.persist(busMan);
@@ -80,7 +83,6 @@ public class PopulateDataBase {
 					true, "Patricia", "patricia@passenger.tn", "0000");
 			entityManager.persist(passenger);
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 		// Creation of a line
@@ -106,6 +108,27 @@ public class PopulateDataBase {
 
 		stationServicesLocal.createLine(line, stations);
 		stationServicesLocal.createLine(line2, stations2);
+
+		Stop stop2 = new Stop(0, stationServicesLocal.findBusByName("B01"),
+				stationServicesLocal.findStationByName("Tun"));
+		Stop stop4 = new Stop(0, stationServicesLocal.findBusByName("B01"),
+				stationServicesLocal.findStationByName("Safax"));
+		Stop stop3 = new Stop(0, stationServicesLocal.findBusByName("B02"),
+				stationServicesLocal.findStationByName("Tun"));
+		Stop stop5 = new Stop(0, stationServicesLocal.findBusByName("B02"),
+				stationServicesLocal.findStationByName("Safax"));
+		Stop stop6 = new Stop(0, stationServicesLocal.findBusByName("B02"),
+				stationServicesLocal.findStationByName("Lambadouza"));
+		Stop stop = new Stop(0, stationServicesLocal.findBusByName("B03"),
+				stationServicesLocal.findStationByName("Rouad"));
+
+		
+		entityManager.persist(stop2);
+		entityManager.persist(stop4);
+		entityManager.persist(stop3);
+		entityManager.persist(stop5);
+		entityManager.persist(stop6);
+		entityManager.persist(stop);
 	}
 
 }

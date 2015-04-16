@@ -1,29 +1,38 @@
 package converters;
 
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
 
-import services.interfaces.StationServicesLocal;
+import mBeans.LineController;
 import domain.Line;
 
-@ManagedBean
+@FacesConverter("cl")
 public class LineConverter implements Converter {
-	@EJB
-	private StationServicesLocal stationService;
 
 	@Override
-	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		Line line = stationService.findLineById(Integer.parseInt(arg2));
+	public Object getAsObject(FacesContext context, UIComponent component,
+			String value) {
+		if (value == null) {
+			return null;
+		}
+		LineController lineController = context.getApplication()
+				.evaluateExpressionGet(context, "#{lineController}",
+						LineController.class);
+		Line line = lineController.doFindLineByName(value);
+		System.out.println(line);
 		return line;
 	}
 
 	@Override
-	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-
-		return String.valueOf(((Line) arg2).getId());
+	public String getAsString(FacesContext context, UIComponent component,
+			Object object) {
+		String string = null;
+		if (object instanceof Line) {
+			string = ((Line) object).getName();
+		}
+		return string;
 	}
 
 }
