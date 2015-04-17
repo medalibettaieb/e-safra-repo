@@ -20,7 +20,9 @@ public class TestComingSoonBuses {
 		Station station = stationServicesRemote.findStationByName("Safax");
 		List<Bus> buses = stationServicesRemote.findComingSoonBuses(station);
 
+		System.out.println(buses.size());
 		for (Bus b : buses) {
+		
 			System.out.println(b.getNum());
 		}
 

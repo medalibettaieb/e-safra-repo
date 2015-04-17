@@ -71,4 +71,9 @@ public class Bus implements Serializable {
 		this.line = line;
 	}
 
+	@Override
+	public String toString() {
+		return "Bus [num=" + num + "]";
+	}
+
 }

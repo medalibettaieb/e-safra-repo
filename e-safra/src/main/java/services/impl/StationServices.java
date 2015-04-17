@@ -32,7 +32,6 @@ public class StationServices implements StationServicesRemote,
 	 * Default constructor.
 	 */
 	public StationServices() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -64,7 +63,6 @@ public class StationServices implements StationServicesRemote,
 			}
 			b = true;
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		return b;
 	}
@@ -175,20 +173,28 @@ public class StationServices implements StationServicesRemote,
 	public List<Bus> findComingSoonBuses(Station station) {
 		List<Bus> buses = new ArrayList<>();
 		List<Line> lines = findLinesByStation(station.getId());
+		System.out.println(lines);
 		for (Line l : lines) {
 			List<Bus> buses2 = findBusesByLineId(l.getId());
+			System.out.println(l + "" + buses2);
 			for (Bus b : buses2) {
 				Stop lastOne = findLastStopByBusId(b.getId());
-				Station lastStation = lastOne.getStation();
-				Integer lastStationOrder = findStationOrderByLineId(
-						lastStation.getId(), l.getId());
-				Integer thisStationOrder = findStationOrderByLineId(
-						station.getId(), l.getId());
-				System.out.println(thisStationOrder);
-				System.out.println(lastStationOrder);
+				if (lastOne != null) {
 
-				if (lastStationOrder < thisStationOrder) {
-					buses.add(b);
+					Station lastStation = lastOne.getStation();
+					Integer lastStationOrder = findStationOrderByLineId(
+							lastStation.getId(), l.getId());
+					Integer thisStationOrder = findStationOrderByLineId(
+							station.getId(), l.getId());
+					System.out.println(b + " last stop "
+							+ lastOne.getStation().getName() + " this order"
+							+ thisStationOrder + " last order"
+							+ lastStationOrder);
+
+					if (thisStationOrder != null && lastStationOrder != null
+							&& lastStationOrder < thisStationOrder) {
+						buses.add(b);
+					}
 				}
 			}
 		}
@@ -199,9 +205,13 @@ public class StationServices implements StationServicesRemote,
 	@Override
 	public Stop findLastStopByBusId(Integer idBus) {
 		Stop stop = null;
-		String jpql = "select s from Stop s order by  s.stopId.date desc";
-		TypedQuery<Stop> query = entityManager.createQuery(jpql, Stop.class);
-		stop = query.getResultList().get(0);
+		String jpql = "select s from Stop s where s.bus.id=:param1 order by  s.stopId.date desc";
+		TypedQuery<Stop> query = entityManager.createQuery(jpql, Stop.class)
+				.setParameter("param1", idBus);
+		List<Stop> stops = query.getResultList();
+		if (stops.size() != 0) {
+			stop = stops.get(0);
+		}
 		return stop;
 	}
 
@@ -216,7 +226,6 @@ public class StationServices implements StationServicesRemote,
 		try {
 			order = query.getSingleResult();
 		} catch (Exception e) {
-			System.err.println("not found");
 		}
 
 		return order;
