@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:form>
+	<h1>
+		<h:outputText value="lines selection  Example" />
+	</h1>
+	<h2>
+		<h:outputText value="SelectManyCheckbox Example" />
+	</h2>
+
+	<h:selectManyCheckbox value="#{lineController.selectedLines}" converter="cl">
+		<f:selectItems value="#{lineBean.lines}" var="l" itemValue="#{l}"
+			itemLabel="#{l.name}"></f:selectItems>
+	</h:selectManyCheckbox>
+	<h:commandButton action="#{lineController.displaySelectedLines}"
+		value="zid" />
+</h:form>
+</html>

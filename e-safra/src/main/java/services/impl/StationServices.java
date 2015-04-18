@@ -244,4 +244,10 @@ public class StationServices implements StationServicesRemote,
 				.createQuery("select s from Station  s where s.name=:param1")
 				.setParameter("param1", name).getSingleResult();
 	}
+
+	@Override
+	public List<Bus> findAllBuses() {
+		return entityManager.createQuery("select b from Bus b", Bus.class)
+				.getResultList();
+	}
 }

@@ -46,4 +46,6 @@ public interface StationServicesLocal {
 
 	Station findStationByName(String name);
 
+	List<Bus> findAllBuses();
+
 }
