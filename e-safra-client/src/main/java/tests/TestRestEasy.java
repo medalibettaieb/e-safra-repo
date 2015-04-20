@@ -13,8 +13,16 @@ public class TestRestEasy {
 				.target("http://localhost:8180/e-safra-web/rest/stations/")
 				.path("{id}").resolveTemplate("id", 2).request()
 				.get(Station.class);
-		
+
 		System.out.println(station.getName());
+
+		Station[] stations = (Station[]) client
+				.target("http://localhost:8180/e-safra-web/rest/stations/")
+				.request().get(Station[].class);
+
+		for (Station s : stations) {
+			System.out.println(s.getName() + "  " + s.getId());
+		}
 
 	}
 

@@ -47,7 +47,10 @@ public interface StationServicesLocal {
 
 	Line findLineByName(String name);
 
-	List<Bus> findComingSoonBuses(Station station);
+	@GET
+	@Path("/comingSoonBuses/{idStation}")
+	@Produces("application/json")
+	List<Bus> findComingSoonBuses(@PathParam("idStation") Integer idStation);
 
 	Stop findLastStopByBusId(Integer idBus);
 

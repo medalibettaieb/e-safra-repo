@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Entity implementation class for Entity: Bus
  *
@@ -44,7 +46,7 @@ public class Bus implements Serializable {
 		this.id = id;
 	}
 
-	@Column(unique=true)
+	@Column(unique = true)
 	public String getNum() {
 		return num;
 	}
@@ -54,6 +56,7 @@ public class Bus implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "bus")
+	@JsonIgnore
 	public List<Stop> getStops() {
 		return stops;
 	}

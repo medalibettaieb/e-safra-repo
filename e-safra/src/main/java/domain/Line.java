@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Entity implementation class for Entity: Line
  *
@@ -54,6 +56,7 @@ public class Line implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "line", cascade = CascadeType.PERSIST)
+	@JsonIgnore
 	public List<Bus> getBuses() {
 		return buses;
 	}
@@ -70,6 +73,7 @@ public class Line implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "line")
+	@JsonIgnore
 	public List<Type> getTypes() {
 		return types;
 	}
@@ -107,6 +111,5 @@ public class Line implements Serializable {
 			return false;
 		return true;
 	}
-	
 
 }

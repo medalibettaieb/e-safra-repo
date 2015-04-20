@@ -36,7 +36,7 @@ public interface StationServicesRemote {
 
 	Line findLineByName(String name);
 
-	List<Bus> findComingSoonBuses(Station station);
+	List<Bus> findComingSoonBuses(Integer idStation);
 
 	Stop findLastStopByBusId(Integer idBus);
 

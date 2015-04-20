@@ -9,9 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 
 import services.interfaces.StationServicesLocal;
 import services.interfaces.StationServicesRemote;
@@ -25,7 +22,6 @@ import domain.Type;
  * Session Bean implementation class StationServices
  */
 @Stateless
-
 public class StationServices implements StationServicesRemote,
 		StationServicesLocal {
 
@@ -174,7 +170,8 @@ public class StationServices implements StationServicesRemote,
 	}
 
 	@Override
-	public List<Bus> findComingSoonBuses(Station station) {
+	public List<Bus> findComingSoonBuses(Integer idStation) {
+		Station station = entityManager.find(Station.class, idStation);
 		List<Bus> buses = new ArrayList<>();
 		List<Line> lines = findLinesByStation(station.getId());
 		System.out.println(lines);
