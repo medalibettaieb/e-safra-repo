@@ -10,11 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Entity implementation class for Entity: Station
  *
  */
 @Entity
+
 public class Station implements Serializable {
 
 	private Integer id;
@@ -53,6 +56,7 @@ public class Station implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "station")
+	@JsonIgnore
 	public List<Stop> getStops() {
 		return stops;
 	}
@@ -62,6 +66,7 @@ public class Station implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "station")
+	@JsonIgnore
 	public List<Type> getTypes() {
 		return types;
 	}
