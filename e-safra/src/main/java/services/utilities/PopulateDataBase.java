@@ -87,8 +87,8 @@ public class PopulateDataBase {
 
 		// Creation of a line
 
-		Map<Integer, Station> stations = new HashMap();
-		Map<Integer, Station> stations2 = new HashMap();
+		Map<Integer, Station> stations = new HashMap<Integer, Station>();
+		Map<Integer, Station> stations2 = new HashMap<Integer, Station>();
 
 		stations.put(0, station);
 		stations.put(1, station2);
@@ -122,7 +122,6 @@ public class PopulateDataBase {
 		Stop stop = new Stop(0, stationServicesLocal.findBusByName("B03"),
 				stationServicesLocal.findStationByName("Rouad"));
 
-		
 		entityManager.persist(stop2);
 		entityManager.persist(stop4);
 		entityManager.persist(stop3);

@@ -22,7 +22,7 @@ public class TestCreateLine {
 		Station station2 = stationServicesRemote.findStationById(2);
 		Station station3 = stationServicesRemote.findStationById(3);
 
-		Map<Integer, Station> stations = new HashMap();
+		Map<Integer, Station> stations = new HashMap<Integer, Station>();
 
 		stations.put(0, station);
 		stations.put(1, station2);
