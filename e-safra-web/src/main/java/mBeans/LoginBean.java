@@ -14,6 +14,7 @@ import domain.User;
 public class LoginBean {
 
 	private User user = new User();
+	private Boolean loggedInAsBusMan = false;
 	@EJB
 	private IdentificationServiceLocal identificationServiceLocal;
 
@@ -24,6 +25,7 @@ public class LoginBean {
 		if (userFound != null) {
 			user = userFound;
 			if (userFound instanceof BusMan) {
+				loggedInAsBusMan = true;
 				navigateTo = "/pages/busMan/home?faces-redirect=true";
 			}
 			if (userFound instanceof Driver) {
@@ -41,6 +43,14 @@ public class LoginBean {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Boolean getLoggedInAsBusMan() {
+		return loggedInAsBusMan;
+	}
+
+	public void setLoggedInAsBusMan(Boolean loggedInAsBusMan) {
+		this.loggedInAsBusMan = loggedInAsBusMan;
 	}
 
 }
