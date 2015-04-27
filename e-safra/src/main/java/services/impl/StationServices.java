@@ -251,4 +251,40 @@ public class StationServices implements StationServicesRemote,
 		return entityManager.createQuery("select b from Bus b", Bus.class)
 				.getResultList();
 	}
+
+	@Override
+	public Boolean addBus(Bus bus) {
+		Boolean b = false;
+		try {
+			entityManager.persist(bus);
+			b = true;
+		} catch (Exception e) {
+
+		}
+		return b;
+	}
+
+	@Override
+	public Boolean updateBus(Bus bus) {
+		Boolean b = false;
+		try {
+			entityManager.merge(bus);
+			b = true;
+		} catch (Exception e) {
+
+		}
+		return b;
+	}
+
+	@Override
+	public Boolean deleteBusById(Integer id) {
+		Boolean b = false;
+		try {
+			entityManager.remove(findBusById(id));
+			b = true;
+		} catch (Exception e) {
+
+		}
+		return b;
+	}
 }
