@@ -61,11 +61,13 @@ public interface StationServicesLocal {
 	Station findStationByName(String name);
 
 	List<Bus> findAllBuses();
-	
+
 	Boolean addBus(Bus bus);
-	
+
 	Boolean updateBus(Bus bus);
-	
+
 	Boolean deleteBusById(Integer id);
+
+	List<Line> findAllLines();
 
 }

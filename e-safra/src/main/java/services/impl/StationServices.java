@@ -287,4 +287,10 @@ public class StationServices implements StationServicesRemote,
 		}
 		return b;
 	}
+
+	@Override
+	public List<Line> findAllLines() {
+		return entityManager.createQuery("select l from Line l", Line.class)
+				.getResultList();
+	}
 }

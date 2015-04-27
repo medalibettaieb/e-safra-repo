@@ -1,5 +1,6 @@
 package mBeans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,6 +15,8 @@ import domain.Line;
 public class LineController {
 	private Line line;
 	private List<Line> selectedLines;
+	private List<Line> lines = new ArrayList<Line>();
+
 	@EJB
 	private StationServicesLocal stationServicesLocal;
 
@@ -45,6 +48,15 @@ public class LineController {
 
 	public void setSelectedLines(List<Line> selectedLines) {
 		this.selectedLines = selectedLines;
+	}
+
+	public List<Line> getLines() {
+		lines = stationServicesLocal.findAllLines();
+		return lines;
+	}
+
+	public void setLines(List<Line> lines) {
+		this.lines = lines;
 	}
 
 }
