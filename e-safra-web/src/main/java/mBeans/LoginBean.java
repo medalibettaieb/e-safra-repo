@@ -22,7 +22,7 @@ public class LoginBean {
 		User userFound = identificationServiceLocal.login(user.getLogin(),
 				user.getPassword());
 		if (userFound != null) {
-			user=userFound;
+			user = userFound;
 			if (userFound instanceof BusMan) {
 				navigateTo = "/pages/busMan/home?faces-redirect=true";
 			}
