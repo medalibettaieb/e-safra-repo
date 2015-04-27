@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<h1>manage buses</h1>
+	<h:form>
+		<h:dataTable value="#{busesBean.buses}" var="b" border="2">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="number" />
+				</f:facet>
+#{b.num}
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#" />
+				</f:facet>
+				<h:commandButton action="#{busesBean.doSelect}" value="select">
+					<f:setPropertyActionListener value="#{b}" target="#{busesBean.bus}"></f:setPropertyActionListener>
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+		<h:commandButton action="#{busesBean.doSelect}" value="add bus" />
+		<h:panelGrid columns="2" rendered="#{busesBean.visibility}">
+			<h:outputText value="num" />
+			<h:inputText value="#{busesBean.bus.num}" />
+			<h:outputText value="line" />
+			<h:inputText value="#{busesBean.bus.line.name}" />
+			<h:outputText value="line to update" />
+			<h:selectOneMenu value="#{lineController.line}" converter="cl">
+				<f:selectItems value="#{lineController.lines}" var="l"
+					itemLabel="#{l.name}" itemValue="#{l}"></f:selectItems>
+			</h:selectOneMenu>
+			<h:commandButton action="#{busesBean.doSaveOrUpdate}"
+				value="save or update" />
+			<h:commandButton action="#{busesBean.doDeleteBus}" value="delete" />
+		</h:panelGrid>
+
+	</h:form>
+</body>
+</html>
