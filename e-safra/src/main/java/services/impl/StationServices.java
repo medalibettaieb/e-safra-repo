@@ -3,6 +3,7 @@ package services.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,9 +15,11 @@ import services.interfaces.StationServicesLocal;
 import services.interfaces.StationServicesRemote;
 import domain.Bus;
 import domain.Line;
+import domain.Section;
 import domain.Station;
 import domain.Stop;
 import domain.Type;
+import domain.TypeId;
 
 /**
  * Session Bean implementation class StationServices
@@ -293,4 +296,27 @@ public class StationServices implements StationServicesRemote,
 		return entityManager.createQuery("select l from Line l", Line.class)
 				.getResultList();
 	}
+
+	@Override
+	public Boolean assignSectionToLine(Integer idLine,
+			Map<Section, List<Station>> stations) {
+		Boolean b = false;
+		try {
+			for (Entry<Section, List<Station>> entry : stations.entrySet()) {
+				Section section = entry.getKey();
+				List<Station> stationsFound = entry.getValue();
+				for (Station s : stationsFound) {
+					Type type = entityManager.find(Type.class, new TypeId(
+							idLine, s.getId()));
+					type.setSection(section);
+					entityManager.merge(type);
+				}
+			}
+			b = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+
 }

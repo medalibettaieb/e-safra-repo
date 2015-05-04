@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import domain.Bus;
 import domain.Line;
+import domain.Section;
 import domain.Station;
 import domain.Stop;
 
@@ -69,5 +70,8 @@ public interface StationServicesLocal {
 	Boolean deleteBusById(Integer id);
 
 	List<Line> findAllLines();
+
+	Boolean assignSectionToLine(Integer idLine,
+			Map<Section, List<Station>> stations);
 
 }

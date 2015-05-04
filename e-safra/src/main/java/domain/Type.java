@@ -22,6 +22,7 @@ public class Type implements Serializable {
 
 	private Station station;
 	private Line line;
+	private Section section;
 
 	public Type() {
 		super();
@@ -42,6 +43,7 @@ public class Type implements Serializable {
 	public void setTypeId(TypeId typeId) {
 		this.typeId = typeId;
 	}
+
 
 	public String getType() {
 		return type;
@@ -77,6 +79,15 @@ public class Type implements Serializable {
 
 	public void setLine(Line line) {
 		this.line = line;
+	}
+
+	@ManyToOne(cascade=CascadeType.MERGE)
+	public Section getSection() {
+		return section;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
 	}
 
 }

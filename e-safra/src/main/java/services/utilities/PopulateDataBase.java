@@ -19,6 +19,7 @@ import domain.BusMan;
 import domain.Driver;
 import domain.Line;
 import domain.Passenger;
+import domain.Section;
 import domain.Station;
 import domain.Stop;
 
@@ -54,6 +55,11 @@ public class PopulateDataBase {
 		Station station2 = new Station("Safax");
 		Station station3 = new Station("Lambadouza");
 		Station station4 = new Station("Rouad");
+
+		Section section1 = new Section();
+		section1.setName("Section 1");
+		Section section2 = new Section();
+		section2.setName("Section 2");
 
 		List<Bus> listBuses1 = new ArrayList<>();
 		List<Bus> listBuses2 = new ArrayList<>();
@@ -128,6 +134,22 @@ public class PopulateDataBase {
 		entityManager.persist(stop5);
 		entityManager.persist(stop6);
 		entityManager.persist(stop);
+		
+		entityManager.persist(section1);
+		entityManager.persist(section2);
+
+		Map<Section, List<Station>> map = new HashMap<>();
+		List<Station> section1Stations = new ArrayList<Station>();
+
+		section1Stations.add(station);
+		section1Stations.add(station2);
+		map.put(section1, section1Stations);
+
+		List<Station> section2Stations = new ArrayList<Station>();
+		section2Stations.add(station3);
+		map.put(section2, section2Stations);
+
+		stationServicesLocal.assignSectionToLine(1, map);
 	}
 
 }
