@@ -24,6 +24,12 @@
 			<artifactId>primefaces</artifactId>
 			<version>5.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.2.0.Beta1</version>
+		</dependency>
+
 	</dependencies>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
