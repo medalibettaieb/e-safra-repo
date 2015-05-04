@@ -73,5 +73,7 @@ public interface StationServicesLocal {
 
 	Boolean assignSectionToLine(Integer idLine,
 			Map<Section, List<Station>> stations);
+	
+	List<Section> findSectionByStationsAndLine(Station stationSource, Station stationDest, Line line);
 
 }

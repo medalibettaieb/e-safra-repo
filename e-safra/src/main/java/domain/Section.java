@@ -18,6 +18,7 @@ public class Section implements Serializable {
 
 	private Integer id;
 	private String name;
+	private Integer order;
 	private static final long serialVersionUID = 1L;
 
 	private List<Type> types;
@@ -38,6 +39,14 @@ public class Section implements Serializable {
 
 	public String getName() {
 		return this.name;
+	}
+
+	public Integer getOrder() {
+		return order;
+	}
+
+	public void setOrder(Integer order) {
+		this.order = order;
 	}
 
 	public void setName(String name) {

@@ -319,4 +319,32 @@ public class StationServices implements StationServicesRemote,
 		return b;
 	}
 
+	@Override
+	public List<Section> findSectionByStationsAndLine(Station stationSource,
+			Station stationDest, Line line) {
+		List<Section> sections = new ArrayList<>();
+		try {
+			entityManager.merge(stationSource);
+			entityManager.merge(stationDest);
+			entityManager.merge(line);
+
+			///////////////////////
+			Type typeSource = entityManager.find(Type.class,
+					new TypeId(line.getId(), stationSource.getId()));
+
+			Type typeDest = entityManager.find(Type.class,
+					new TypeId(line.getId(), stationDest.getId()));
+			//////////////////////
+			
+			sections.add(typeSource.getSection());
+			sections.add(typeDest.getSection());
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+
+		return sections;
+
+	}
 }
