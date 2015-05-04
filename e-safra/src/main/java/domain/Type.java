@@ -1,12 +1,14 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: Type
@@ -23,6 +25,7 @@ public class Type implements Serializable {
 	private Station station;
 	private Line line;
 	private Section section;
+	private List<Ticket> tickets;
 
 	public Type() {
 		super();
@@ -44,7 +47,6 @@ public class Type implements Serializable {
 		this.typeId = typeId;
 	}
 
-
 	public String getType() {
 		return type;
 	}
@@ -61,7 +63,7 @@ public class Type implements Serializable {
 		this.stationOrder = stationOrder;
 	}
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idStation", referencedColumnName = "id", insertable = false, updatable = false)
 	public Station getStation() {
 		return station;
@@ -71,7 +73,7 @@ public class Type implements Serializable {
 		this.station = station;
 	}
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idLine", referencedColumnName = "id", insertable = false, updatable = false)
 	public Line getLine() {
 		return line;
@@ -81,13 +83,22 @@ public class Type implements Serializable {
 		this.line = line;
 	}
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	public Section getSection() {
 		return section;
 	}
 
 	public void setSection(Section section) {
 		this.section = section;
+	}
+
+	@OneToMany(mappedBy = "type")
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 
 }

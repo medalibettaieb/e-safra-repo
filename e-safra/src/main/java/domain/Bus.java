@@ -24,8 +24,10 @@ public class Bus implements Serializable {
 	private String num;
 	private static final long serialVersionUID = 1L;
 
+
 	private List<Stop> stops;
 	private Line line;
+	private List<Ticket> tickets;
 
 	public Bus() {
 		super();
@@ -77,6 +79,15 @@ public class Bus implements Serializable {
 	@Override
 	public String toString() {
 		return "Bus [num=" + num + "]";
+	}
+
+	@OneToMany(mappedBy="bus")
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 
 }
