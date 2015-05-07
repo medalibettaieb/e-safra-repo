@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<f:view>
+
+		<h:form id="form">
+			<p:panel id="panel1" header="message validation" toggleable="true">
+				<h:panelGrid columns="3" cellpadding="4" cellspacing="4">
+
+					<h:outputLabel value="value1" />
+					<p:inputText id="value1" value="#{revisionBean.name}"
+						required="true"></p:inputText>
+					<p:message for="value1"></p:message>
+
+
+					<h:outputLabel value="date" />
+					<p:calendar id="date" value="#{revisionBean.dateOfSomeStuff}"
+						required="true"></p:calendar>
+					<p:message for="date"></p:message>
+
+				</h:panelGrid>
+				<p:commandButton value="Valider" update="panel1"></p:commandButton>
+			</p:panel>
+
+
+			<p:panel id="panel2" header="custom validation" toggleable="true">
+				<h:panelGrid columns="3" cellpadding="4" cellspacing="4">
+					<h:outputLabel value="email" />
+					<p:inputText id="email" value="#{revisionBean.email}"
+						validatorMessage="please mail invalid" required="true">
+					</p:inputText>
+					<p:message for="email"></p:message>
+				</h:panelGrid>
+				<p:commandButton value="Valider" update="panel2"></p:commandButton>
+			</p:panel>
+
+
+			<p:panel id="panel3" header="validate Length .." toggleable="true">
+				<h:panelGrid columns="3" cellpadding="4" cellspacing="4">
+					<h:outputLabel value="value3" />
+					<p:inputText id="value3" value="#{revisionBean.name}"
+						required="true">
+						<f:validateLength minimum="3"></f:validateLength>
+					</p:inputText>
+					<p:message for="value3"></p:message>
+				</h:panelGrid>
+				<p:commandButton value="Valider" update="panel3"></p:commandButton>
+			</p:panel>
+			<h:form>
+				<p:panel id="panel4" header="ajax validation" toggleable="true">
+					<h:panelGrid columns="3" cellpadding="4" cellspacing="4">
+						<h:outputLabel value="email" />
+						<p:inputText id="email2" value="#{revisionBean.email}"
+							validatorMessage="mail invalid" required="true">
+							<f:ajax event="blur" render="m2">
+
+							</f:ajax>
+						</p:inputText>
+						<p:message for="email2" id="m2"></p:message>
+
+						<h:outputText value="value2" />
+						<p:inputText id="input4" value="#{revisionBean.name}"
+							required="true" requiredMessage="obligatoire">
+							<f:ajax event="keyup" render="m3"></f:ajax>
+							<f:validateLength minimum="4"></f:validateLength>
+						</p:inputText>
+						<p:message for="input4" id="m3"></p:message>
+
+						<h:outputText value="value2" />
+						<p:inputText id="input5" value="#{revisionBean.name}"
+							required="true" requiredMessage="obligatoire"
+							validatorMessage="pattern invalide">
+							<f:ajax event="blur" render="m6"></f:ajax>
+							<f:validateRegex pattern="[a-zA-Z]*"></f:validateRegex>
+						</p:inputText>
+						<p:message for="input5" id="m6"></p:message>
+					</h:panelGrid>
+
+
+				</p:panel>
+			</h:form>
+		</h:form>
+	</f:view>
+</body>
+</html>
